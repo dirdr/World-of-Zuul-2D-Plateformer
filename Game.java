@@ -53,6 +53,9 @@ public class Game
        aFrame.setTitle("nom du jeu a definir");
        aFrame.setVisible(true);
     }
+
+
+    //comm
     
     
    
