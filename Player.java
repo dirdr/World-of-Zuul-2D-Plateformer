@@ -168,6 +168,8 @@ public class Player
         gtd.setColor(Color.WHITE);
         
     }
+
+    //test
     
     
 }
