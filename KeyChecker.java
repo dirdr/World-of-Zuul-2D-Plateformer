@@ -1,4 +1,3 @@
-
 /**
  * class to manage all of the key press
  *
@@ -9,24 +8,25 @@
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-public class KeyChecker extends KeyAdapter
-{
-    
+
+public class KeyChecker extends KeyAdapter {
+
     GamePanel aPanel;
-    
-    
-    public KeyChecker(final GamePanel pPanel){
+
+
+    public KeyChecker(final GamePanel pPanel) {
         this.aPanel = pPanel;
     }
-    
-    @Override public void keyPressed(KeyEvent pE){
+
+    @Override
+    public void keyPressed(KeyEvent pE) {
         aPanel.keyPressed(pE);
     }
-    
-    @Override public void keyReleased(KeyEvent pE) {
+
+    @Override
+    public void keyReleased(KeyEvent pE) {
         aPanel.keyReleased(pE);
     }
-    
-    
-   
+
+
 }
