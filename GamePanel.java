@@ -9,6 +9,8 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.*;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -21,12 +23,14 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
     private final Timer aGameTimer;
     private final ArrayList<Wall> aStoredWalls;
     private int aCameraX;
+    private BufferedImage sprite;
 
 
     public GamePanel() {
         aPlayer = new Player(400, 300, this);
         aStoredWalls = new ArrayList<Wall>();
         createWall();
+        init();
         aGameTimer = new Timer();
         aGameTimer.schedule(new TimerTask() {
             @Override
@@ -64,17 +68,29 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
         aStoredWalls.add(new Wall(550, 400, 50, 50));
     }
 
+    public void init() {
+        BufferedImageManager vLoader = new BufferedImageManager();
+        BufferedImage vSpriteSheetFromBuffered = null;
+        try {
+            vSpriteSheetFromBuffered = vLoader.load("Knight/noBKG_KnightIdle_strip.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        SpriteSheet vSpriteSheet = new SpriteSheet(vSpriteSheetFromBuffered);
+        this.sprite = vSpriteSheet.spritePicker(23, 12, 23, 32);
+    }
+
     public void paint(Graphics g) {
 
         super.paint(g);
 
         Graphics2D vGtd = (Graphics2D) g;
-        aPlayer.draw(vGtd);
+
+        g.drawImage(sprite, 100, 100, null);
 
         for (Wall wall : aStoredWalls) {
             wall.draw(vGtd);
         }
-
 
     }
 

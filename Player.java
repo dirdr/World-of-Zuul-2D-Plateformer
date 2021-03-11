@@ -145,9 +145,5 @@ public class Player {
 
     }
 
-    public void draw(Graphics2D gtd) {
-        gtd.setColor(Color.BLACK);
-        gtd.fillRect(aX, aY, aWidth, aHeight);
-        gtd.setColor(Color.WHITE);
-    }
+
 }

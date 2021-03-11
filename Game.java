@@ -2,6 +2,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 
 public class Game {
@@ -40,7 +42,10 @@ public class Game {
     public Game() {
         this.createRooms();
         this.play();
+
     }
+
+
 
     public void play() {
         aFrame = new MainFrame();
