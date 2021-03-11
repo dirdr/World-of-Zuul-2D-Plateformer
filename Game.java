@@ -42,12 +42,17 @@ public class Game {
     public Game() {
         this.createRooms();
         this.play();
+
     }
 
 
 
     public void play() {
-        aFrame = new MainFrame();
+        try {
+            aFrame = new MainFrame();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         aFrame.setSize(900, 900);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

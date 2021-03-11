@@ -7,13 +7,14 @@
  */
 
 
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
 
@@ -23,12 +24,18 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
     private final Timer aGameTimer;
     private final ArrayList<Wall> aStoredWalls;
     private int aCameraX;
+    private Image aBackGround;
 
 
 
     public GamePanel() {
         aPlayer = new Player(50, 50,this);
         aStoredWalls = new ArrayList<Wall>();
+        try {
+            aBackGround = ImageIO.read(new File("TileSet/spr_Sky_strip.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         createWall();
         aPlayer.init();
         aGameTimer = new Timer();
@@ -66,6 +73,7 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
         aStoredWalls.add(new Wall(250, 500, 50, 50));
         aStoredWalls.add(new Wall(400, 450, 50, 50));
         aStoredWalls.add(new Wall(550, 400, 50, 50));
+        aStoredWalls.add(new Wall(600, 450, 50, 50));
     }
 
 
@@ -74,10 +82,12 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
 
         super.paint(g);
 
-        Graphics2D vGtd = (Graphics2D) g;
+        g.drawImage(aBackGround, 0, 0, 900, 900, this);
+
+
 
         for (Wall wall : aStoredWalls) {
-            wall.draw(vGtd);
+            wall.draw(g);
         }
         aPlayer.draw(g);
 

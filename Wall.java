@@ -6,9 +6,12 @@
  */
 
 
-import java.awt.Rectangle;
-import java.awt.Graphics2D;
-import java.awt.Color;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class Wall {
     private int aX;
@@ -16,6 +19,8 @@ public class Wall {
     private final int aWidth;
     private final int aHeight;
     private final int aStartX;
+    private SpriteSheet aSpriteSheetTiles;
+    private ArrayList<BufferedImage> aTiles;
 
     private final Rectangle aHitBox;
 
@@ -25,15 +30,25 @@ public class Wall {
         this.aWidth = pWidth;
         this.aHeight = pHeight;
         aStartX = pX;
-
         aHitBox = new Rectangle(aX, aY, aWidth, aHeight);
+        init();
     }
 
-    public void draw(Graphics2D vGtd) {
-        vGtd.setColor(Color.BLACK);
-        vGtd.drawRect(aX, aY, aWidth, aHeight);
-        vGtd.setColor(Color.WHITE);
-        vGtd.fillRect(aX + 1, aY + 1, aWidth - 2, aHeight - 2);
+    public void init() {
+        BufferedImageManager vLoader = new BufferedImageManager();
+        BufferedImage vSpriteSheetFromBuffered = null;
+        try {
+            vSpriteSheetFromBuffered = vLoader.load("TileSet/spr_VillageTileSet_strip.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        SpriteSheet vSpriteSheet = new SpriteSheet(vSpriteSheetFromBuffered);
+        this.aTiles = new ArrayList<BufferedImage>();
+        this.aTiles.add(vSpriteSheet.spritePicker(272, 16, 32, 32));
+    }
+
+    public void draw(Graphics g) {
+        g.drawImage(aTiles.get(0), aX, aY, aWidth, aHeight, null);
     }
 
     public Rectangle getHitBox() {
