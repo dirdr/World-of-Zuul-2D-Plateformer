@@ -23,7 +23,8 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
     private final Timer aGameTimer;
     private final ArrayList<Wall> aStoredWalls;
     private int aCameraX;
-    private BufferedImage sprite;
+    private ArrayList<BufferedImage> aSprite;
+    private AnimationManager aCharacter;
 
 
     public GamePanel() {
@@ -77,7 +78,16 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
             e.printStackTrace();
         }
         SpriteSheet vSpriteSheet = new SpriteSheet(vSpriteSheetFromBuffered);
-        this.sprite = vSpriteSheet.spritePicker(23, 12, 23, 32);
+        //idle, reste a gérer les autres animations
+        this.aSprite = new ArrayList<BufferedImage>();
+        aSprite.add(vSpriteSheet.spritePicker(21, 14, 24, 30));
+        aSprite.add(vSpriteSheet.spritePicker(87, 14, 24, 30));
+        aSprite.add(vSpriteSheet.spritePicker(151, 14, 24, 30));
+        aSprite.add(vSpriteSheet.spritePicker(215, 14, 24, 30));
+        aSprite.add(vSpriteSheet.spritePicker(279, 14, 24, 30));
+        aCharacter = new AnimationManager(aSprite);
+        aCharacter.setSpeed(200);
+        aCharacter.start();
     }
 
     public void paint(Graphics g) {
@@ -86,7 +96,10 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
 
         Graphics2D vGtd = (Graphics2D) g;
 
-        g.drawImage(sprite, 100, 100, null);
+        if (aCharacter != null) {
+            aCharacter.update(System.currentTimeMillis());
+            g.drawImage(aCharacter.aSprite, aPlayer.getAX(), aPlayer.getAY(), 50, 50,  null);
+        }
 
         for (Wall wall : aStoredWalls) {
             wall.draw(vGtd);

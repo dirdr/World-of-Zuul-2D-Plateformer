@@ -22,7 +22,7 @@ public class AnimationManager {
     }
 
     public void update(final long pTime) {
-        while (aRunning) {
+        if (aRunning) {
 
             if (pTime - aPreviousTime >= animationSpeed) {
                 aCurrentFrame++;
@@ -41,18 +41,27 @@ public class AnimationManager {
 
     public void start() {
         aRunning = true;
+        aCurrentFrame = 0;
+        aFrameAtPause = 0;
+        aPreviousTime = 0;
+
     }
 
     public void stop() {
         aRunning = false;
+        aCurrentFrame = 0;
+        aFrameAtPause = 0;
+        aPreviousTime = 0;
     }
 
     public void pause() {
-
+        aFrameAtPause = aCurrentFrame;
+        aRunning = false;
     }
 
     public void resume() {
-
+        aCurrentFrame = aFrameAtPause;
+        aRunning = true;
     }
 
 }

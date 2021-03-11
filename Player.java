@@ -145,5 +145,13 @@ public class Player {
 
     }
 
+    public int getAX() {
+        return this.aX;
+    }
+
+    public int getAY() {
+        return this.aY;
+    }
+
 
 }
