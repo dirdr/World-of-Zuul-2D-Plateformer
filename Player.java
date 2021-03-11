@@ -5,9 +5,10 @@
  * @version beta1
  */
 
-import java.awt.Rectangle;
-import java.awt.Graphics2D;
-import java.awt.Color;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class Player {
@@ -20,6 +21,8 @@ public class Player {
     private double aXSpeed;
     private double aYSpeed;
     private final Rectangle aHitBox; //utilisation pour gerer les colisions
+
+
 
 
     boolean aKeyLeft; //press the left key or not 
@@ -37,6 +40,10 @@ public class Player {
     private boolean aIsJumping;
 
 
+    private ArrayList<BufferedImage> aSprite;
+    private AnimationManager aCharacter;
+
+
     public Player(final int pX, final int pY, final GamePanel panel) {
 
         this.panel = panel;
@@ -49,8 +56,8 @@ public class Player {
         this.aJumpForceModified = 0.4; //force de saut modifié
 
 
-        aWidth = 50; //widht for the player 
-        aHeight = 100; //height for th player 
+        aWidth = 100; //widht for the player
+        aHeight = 100; //height for th player
 
         aHitBox = new Rectangle(pX, pY, aWidth, aHeight);
 
@@ -142,16 +149,55 @@ public class Player {
         aHitBox.x = aX;
         aHitBox.y = aY;
 
-
     }
 
-    public int getAX() {
-        return this.aX;
+
+    public void init() {
+        BufferedImageManager vLoader = new BufferedImageManager();
+        BufferedImage vSpriteSheetFromBuffered = null;
+        try {
+            vSpriteSheetFromBuffered = vLoader.load("Knight/noBKG_KnightIdle_strip.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        SpriteSheet vSpriteSheet = new SpriteSheet(vSpriteSheetFromBuffered);
+
+        //idle, reste a gérer les autres animations
+        this.aSprite = new ArrayList<BufferedImage>();
+
+        aSprite.add(vSpriteSheet.spritePicker(14, 15, 35, 30));
+        aSprite.add(vSpriteSheet.spritePicker(78, 15, 35, 30));
+        aSprite.add(vSpriteSheet.spritePicker(142, 15, 35, 30));
+        aSprite.add(vSpriteSheet.spritePicker(206, 15, 35, 30));
+        aSprite.add(vSpriteSheet.spritePicker(270, 15, 35, 30));
+
+        aSprite.add(vSpriteSheet.spritePicker(334, 15, 35, 30));
+        aSprite.add(vSpriteSheet.spritePicker(398, 15, 35, 30));
+        aSprite.add(vSpriteSheet.spritePicker(462, 15, 35, 30));
+        aSprite.add(vSpriteSheet.spritePicker(526, 15, 35, 30));
+        aSprite.add(vSpriteSheet.spritePicker(590, 15, 35, 30));
+
+        aSprite.add(vSpriteSheet.spritePicker(654, 15, 35, 30));
+        aSprite.add(vSpriteSheet.spritePicker(718, 15, 35, 30));
+        aSprite.add(vSpriteSheet.spritePicker(782, 15, 35, 30));
+        aSprite.add(vSpriteSheet.spritePicker(846, 15, 35, 30));
+        aSprite.add(vSpriteSheet.spritePicker(910, 15, 35, 30));
+
+
+        aCharacter = new AnimationManager(aSprite);
+        aCharacter.setSpeed(64);
+        aCharacter.start();
     }
 
-    public int getAY() {
-        return this.aY;
+
+
+    public void draw(Graphics g) {
+        if (aCharacter != null) {
+            aCharacter.update(System.currentTimeMillis());
+            g.drawImage(aCharacter.aSprite, aX, aY, aWidth, aHeight,null);
+        }
     }
+
 
 
 }

@@ -23,15 +23,14 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
     private final Timer aGameTimer;
     private final ArrayList<Wall> aStoredWalls;
     private int aCameraX;
-    private ArrayList<BufferedImage> aSprite;
-    private AnimationManager aCharacter;
+
 
 
     public GamePanel() {
-        aPlayer = new Player(400, 300, this);
+        aPlayer = new Player(50, 50,this);
         aStoredWalls = new ArrayList<Wall>();
         createWall();
-        init();
+        aPlayer.init();
         aGameTimer = new Timer();
         aGameTimer.schedule(new TimerTask() {
             @Override
@@ -69,26 +68,7 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
         aStoredWalls.add(new Wall(550, 400, 50, 50));
     }
 
-    public void init() {
-        BufferedImageManager vLoader = new BufferedImageManager();
-        BufferedImage vSpriteSheetFromBuffered = null;
-        try {
-            vSpriteSheetFromBuffered = vLoader.load("Knight/noBKG_KnightIdle_strip.png");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        SpriteSheet vSpriteSheet = new SpriteSheet(vSpriteSheetFromBuffered);
-        //idle, reste a gérer les autres animations
-        this.aSprite = new ArrayList<BufferedImage>();
-        aSprite.add(vSpriteSheet.spritePicker(21, 14, 24, 30));
-        aSprite.add(vSpriteSheet.spritePicker(87, 14, 24, 30));
-        aSprite.add(vSpriteSheet.spritePicker(151, 14, 24, 30));
-        aSprite.add(vSpriteSheet.spritePicker(215, 14, 24, 30));
-        aSprite.add(vSpriteSheet.spritePicker(279, 14, 24, 30));
-        aCharacter = new AnimationManager(aSprite);
-        aCharacter.setSpeed(200);
-        aCharacter.start();
-    }
+
 
     public void paint(Graphics g) {
 
@@ -96,14 +76,10 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
 
         Graphics2D vGtd = (Graphics2D) g;
 
-        if (aCharacter != null) {
-            aCharacter.update(System.currentTimeMillis());
-            g.drawImage(aCharacter.aSprite, aPlayer.getAX(), aPlayer.getAY(), 50, 50,  null);
-        }
-
         for (Wall wall : aStoredWalls) {
             wall.draw(vGtd);
         }
+        aPlayer.draw(g);
 
     }
 
