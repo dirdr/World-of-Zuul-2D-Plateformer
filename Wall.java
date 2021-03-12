@@ -19,11 +19,18 @@ public class Wall {
     private final int aWidth;
     private final int aHeight;
     private final int aStartX;
-    private SpriteSheet aSpriteSheetTiles;
+    private SpriteSheet aSpriteSheet;
     private ArrayList<BufferedImage> aTiles;
 
     private final Rectangle aHitBox;
 
+    /**
+     *
+     * @param pX x coordinate
+     * @param pY y coordinate
+     * @param pWidth wall width
+     * @param pHeight wall height
+     */
     public Wall(final int pX, final int pY, final int pWidth, final int pHeight) {
         this.aX = pX;
         this.aY = pY;
@@ -34,6 +41,11 @@ public class Wall {
         init();
     }
 
+    /**
+     * Texture initialization method
+     * create a new BufferedImageManager and try to Load the TileSet
+     * create a New SpriteSheet Object and pick a texture from it
+     */
     public void init() {
         BufferedImageManager vLoader = new BufferedImageManager();
         BufferedImage vSpriteSheetFromBuffered = null;
@@ -42,13 +54,19 @@ public class Wall {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        SpriteSheet vSpriteSheet = new SpriteSheet(vSpriteSheetFromBuffered);
+        aSpriteSheet = new SpriteSheet(vSpriteSheetFromBuffered);
         this.aTiles = new ArrayList<BufferedImage>();
-        this.aTiles.add(vSpriteSheet.spritePicker(272, 16, 32, 32));
+        this.aTiles.add(aSpriteSheet.spritePicker(272, 16, 32, 32));
+
+
     }
 
-    public void draw(Graphics g) {
-        g.drawImage(aTiles.get(0), aX, aY, aWidth, aHeight, null);
+    /**
+     *
+     * @param pG
+     */
+    public void draw(Graphics pG) {
+        pG.drawImage(aTiles.get(0), aX, aY, aWidth, aHeight, null);
     }
 
     public Rectangle getHitBox() {

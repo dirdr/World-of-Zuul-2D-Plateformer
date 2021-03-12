@@ -29,7 +29,7 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
 
 
     public GamePanel() {
-        aPlayer = new Player(50, 50,this);
+        aPlayer = new Player(400, 300,this);
         aStoredWalls = new ArrayList<Wall>();
         try {
             aBackGround = ImageIO.read(new File("TileSet/spr_Sky_strip.png"));

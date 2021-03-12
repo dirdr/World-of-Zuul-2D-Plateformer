@@ -165,23 +165,26 @@ public class Player {
         //idle, reste a gérer les autres animations
         this.aSprite = new ArrayList<BufferedImage>();
 
-        aSprite.add(vSpriteSheet.spritePicker(14, 15, 35, 37));
-        aSprite.add(vSpriteSheet.spritePicker(78, 15, 35, 37));
-        aSprite.add(vSpriteSheet.spritePicker(142, 15, 35, 37));
-        aSprite.add(vSpriteSheet.spritePicker(206, 15, 35, 37));
-        aSprite.add(vSpriteSheet.spritePicker(270, 15, 35, 37));
 
-        aSprite.add(vSpriteSheet.spritePicker(334, 15, 35, 37));
-        aSprite.add(vSpriteSheet.spritePicker(398, 15, 35, 37));
-        aSprite.add(vSpriteSheet.spritePicker(462, 15, 35, 37));
-        aSprite.add(vSpriteSheet.spritePicker(526, 15, 35, 37));
-        aSprite.add(vSpriteSheet.spritePicker(590, 15, 35, 37));
 
-        aSprite.add(vSpriteSheet.spritePicker(654, 15, 35, 37));
-        aSprite.add(vSpriteSheet.spritePicker(718, 15, 35, 37));
-        aSprite.add(vSpriteSheet.spritePicker(782, 15, 35, 37));
-        aSprite.add(vSpriteSheet.spritePicker(846, 15, 35, 37));
-        aSprite.add(vSpriteSheet.spritePicker(910, 15, 35, 37));
+        aSprite.add(vSpriteSheet.spritePicker(23, 14, 24, 30));
+        aSprite.add(vSpriteSheet.spritePicker(87, 14, 24, 30));
+        aSprite.add(vSpriteSheet.spritePicker(151, 14, 24, 30));
+        aSprite.add(vSpriteSheet.spritePicker(215, 14, 24, 30));
+        aSprite.add(vSpriteSheet.spritePicker(279, 14, 24, 30));
+
+        aSprite.add(vSpriteSheet.spritePicker(343, 14, 24, 30));
+        aSprite.add(vSpriteSheet.spritePicker(407, 14, 25, 30));
+        aSprite.add(vSpriteSheet.spritePicker(471, 14, 26, 28));
+        aSprite.add(vSpriteSheet.spritePicker(535, 14, 25, 27));
+        aSprite.add(vSpriteSheet.spritePicker(599, 14, 22, 27));
+
+        aSprite.add(vSpriteSheet.spritePicker(663, 14, 22, 28));
+        aSprite.add(vSpriteSheet.spritePicker(727, 14, 23, 29));
+        aSprite.add(vSpriteSheet.spritePicker(791, 14, 24, 30));
+        aSprite.add(vSpriteSheet.spritePicker(855, 14, 24, 30));
+        aSprite.add(vSpriteSheet.spritePicker(919, 14, 24, 30));
+
 
 
         aCharacter = new AnimationManager(aSprite);
