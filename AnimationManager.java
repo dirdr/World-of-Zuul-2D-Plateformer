@@ -5,7 +5,7 @@ public class AnimationManager {
 
     private ArrayList<BufferedImage> aFrames;
 
-    BufferedImage aSprite;
+    public BufferedImage aSprite;
     private boolean aRunning = false;
     private long aBeforeTime;
     private long aPreviousTime;
@@ -15,6 +15,14 @@ public class AnimationManager {
 
     public AnimationManager(ArrayList<BufferedImage> pFrames) {
         this.aFrames = pFrames;
+    }
+
+    public void setFrames(ArrayList<BufferedImage> pFrames) {
+        this.aFrames = pFrames;
+    }
+
+    public BufferedImage getSprite() {
+        return this.aSprite;
     }
 
     public void setSpeed(final long pSpeed) {
@@ -38,6 +46,8 @@ public class AnimationManager {
 
         }
     }
+
+
 
     public void start() {
         aRunning = true;

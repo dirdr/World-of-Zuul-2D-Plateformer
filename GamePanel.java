@@ -37,12 +37,12 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
             e.printStackTrace();
         }
         createWall();
-        aPlayer.init();
         aGameTimer = new Timer();
+        //MAIN GAME LOOP
         aGameTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                aPlayer.set();
+                aPlayer.update();
                 for (Wall wall : aStoredWalls) {
                     wall.set(aCameraX);
                 }
@@ -83,8 +83,6 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
         super.paint(g);
 
         g.drawImage(aBackGround, 0, 0, 900, 900, this);
-
-
 
         for (Wall wall : aStoredWalls) {
             wall.draw(g);
