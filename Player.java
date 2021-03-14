@@ -8,9 +8,9 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 
 public class Player {
@@ -35,6 +35,7 @@ public class Player {
     private float aJumpTimeCounter;
     private final float aJumpTime;
     private final double aJumpForceModified;
+    private int aDirection;
 
 
 
@@ -90,8 +91,13 @@ public class Player {
 
         this.aCurrentStatus = aIDLE;
         this.aCurrentJumpStatus = aNOT_JUMPING;
+        this.aDirection = 1;
 
+        this.init();
 
+    }
+
+    public void init() {
 
         //create a new Loader Object
         BufferedImageManager vLoader = new BufferedImageManager();
@@ -206,11 +212,6 @@ public class Player {
         this.aCharacterRunning = new AnimationManager(vRunAnimation);
         this.aCharacterRunning.setSpeed(128);
 
-
-        aCharacterIDLE.start();
-
-
-
     }
 
 
@@ -218,6 +219,7 @@ public class Player {
      * update function
      */
     public void update() {
+
 
         aCurrentStatus = aIDLE;
 
@@ -228,11 +230,13 @@ public class Player {
         if (aKeyLeft && !aKeyRight) {
             aXSpeed--;
             aCurrentStatus = aRUN;
+            this.aDirection = -1;
         }
         //Go right
         if (aKeyRight && !aKeyLeft) {
             aXSpeed++;
             aCurrentStatus = aRUN;
+            this.aDirection = 1;
         }
         //if the speed is to slow stop the player
         if (aXSpeed > 0 && aXSpeed < 0.75) {
@@ -275,6 +279,9 @@ public class Player {
         aYSpeed += 0.5;
 
 
+        System.out.print(aCurrentStatus);
+
+
 
 
         //hit box x
@@ -306,7 +313,6 @@ public class Player {
             }
         }
 
-
         panel.setCameraX(panel.getCameraX() + (int) aXSpeed);
         aY += aYSpeed;
 
@@ -315,15 +321,42 @@ public class Player {
 
     }
 
+
+    boolean vIdleFlag = false;
+    boolean vRunFlag = false;
+    boolean vRisingFlag = false;
+    boolean vFallingFlag = false;
+
+    public BufferedImage animationChooser() {
+        if (aCurrentStatus == aRUN) {
+            if (!vRunFlag) {
+                aCharacterRunning.start();
+                vIdleFlag = true;
+            }
+            aCharacterRunning.update(System.currentTimeMillis());
+            return aCharacterRunning.aSprite;
+        } else {
+            if (!vIdleFlag) {
+                aCharacterIDLE.start();
+                vIdleFlag = false;
+            }
+            aCharacterIDLE.update(System.currentTimeMillis());
+            return aCharacterIDLE.aSprite;
+        }
+
+    }
+
+
     public void draw(Graphics g) {
-        BufferedImage vImage;
-        vImage = aCharacterIDLE.aSprite;
 
+        BufferedImage vImage = null;
+        vImage = animationChooser();
+        if (aDirection == -1) {
+            g.drawImage(vImage, aX + aWidth, aY, -aWidth, aHeight, null);
+        } else {
+            g.drawImage(vImage, aX, aY, aWidth, aHeight, null);
+        }
 
-        aCharacterIDLE.update(System.currentTimeMillis());
-
-
-        g.drawImage(vImage, aX, aY, aWidth, aHeight, null);
     }
 
 

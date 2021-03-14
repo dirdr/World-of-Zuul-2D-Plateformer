@@ -17,13 +17,6 @@ public class AnimationManager {
         this.aFrames = pFrames;
     }
 
-    public void setFrames(ArrayList<BufferedImage> pFrames) {
-        this.aFrames = pFrames;
-    }
-
-    public BufferedImage getSprite() {
-        return this.aSprite;
-    }
 
     public void setSpeed(final long pSpeed) {
         this.animationSpeed = pSpeed;
