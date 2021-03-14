@@ -79,15 +79,15 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
 
 
     public void paint(Graphics g) {
-
         super.paint(g);
+
 
         g.drawImage(aBackGround, 0, 0, 900, 900, this);
 
         for (Wall wall : aStoredWalls) {
             wall.draw(g);
         }
-        aPlayer.draw(g);
+        this.aPlayer.draw(g);
 
     }
 

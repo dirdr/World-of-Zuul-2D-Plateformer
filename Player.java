@@ -94,6 +94,7 @@ public class Player {
         this.aDirection = 1;
 
         this.init();
+        aCharacterIDLE.start();
 
     }
 
@@ -210,7 +211,7 @@ public class Player {
         vRunAnimation.add(vSpriteSheet.spritePicker(618, 15, 25, 29)); //7
         vRunAnimation.add(vSpriteSheet.spritePicker(713, 16, 25, 28)); //8
         this.aCharacterRunning = new AnimationManager(vRunAnimation);
-        this.aCharacterRunning.setSpeed(128);
+        this.aCharacterRunning.setSpeed(90);
 
     }
 
@@ -221,7 +222,7 @@ public class Player {
     public void update() {
 
 
-        aCurrentStatus = aIDLE;
+        this.aCurrentStatus = aIDLE;
 
         if (aKeyLeft && aKeyRight || !aKeyLeft && !aKeyRight) {
             aXSpeed *= 0.7;
@@ -279,7 +280,7 @@ public class Player {
         aYSpeed += 0.5;
 
 
-        System.out.print(aCurrentStatus);
+
 
 
 
@@ -319,6 +320,8 @@ public class Player {
         aHitBox.x = aX;
         aHitBox.y = aY;
 
+        System.out.print(aCurrentStatus);
+
     }
 
 
@@ -328,19 +331,23 @@ public class Player {
     boolean vFallingFlag = false;
 
     public BufferedImage animationChooser() {
-        if (aCurrentStatus == aRUN) {
+        if (this.aCurrentStatus == aRUN) {
             if (!vRunFlag) {
                 aCharacterRunning.start();
-                vIdleFlag = true;
+                vRunFlag = true;
             }
+            aCharacterRunning.resume();
             aCharacterRunning.update(System.currentTimeMillis());
+            aCharacterRunning.pause();
             return aCharacterRunning.aSprite;
         } else {
             if (!vIdleFlag) {
                 aCharacterIDLE.start();
-                vIdleFlag = false;
+                vIdleFlag = true;
             }
+            aCharacterIDLE.resume();
             aCharacterIDLE.update(System.currentTimeMillis());
+            aCharacterIDLE.pause();
             return aCharacterIDLE.aSprite;
         }
 
@@ -348,17 +355,11 @@ public class Player {
 
 
     public void draw(Graphics g) {
-
-        BufferedImage vImage = null;
-        vImage = animationChooser();
+        BufferedImage vImage = this.animationChooser();
         if (aDirection == -1) {
             g.drawImage(vImage, aX + aWidth, aY, -aWidth, aHeight, null);
         } else {
             g.drawImage(vImage, aX, aY, aWidth, aHeight, null);
         }
-
     }
-
-
-
 }
