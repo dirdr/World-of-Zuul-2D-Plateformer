@@ -32,7 +32,7 @@ public class StateManager {
         this.aStates.get(this.aCurrentState).update();
     }
 
-    public void paint(Graphics g) {
-        this.aStates.get(this.aCurrentState).paint();
+    public void paint(Graphics2D g) {
+        this.aStates.get(this.aCurrentState).paint(g);
     }
 }

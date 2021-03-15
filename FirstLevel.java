@@ -10,6 +10,11 @@ public class FirstLevel extends State {
 
 
 
+    @Override
+    public void input() {
+
+    }
+
     /**
      * First Level's constructor
      * @param pStateManager state manager object for each state extending "State"
@@ -24,7 +29,7 @@ public class FirstLevel extends State {
      * Paint the level components
      */
     @Override
-    public void paint() {
+    public void paint(Graphics2D pG) {
 
     }
 
@@ -44,6 +49,20 @@ public class FirstLevel extends State {
     @Override
     public void init() {
         aPlayer = new Player(400, 300);
+
+    }
+
+
+    public int getCameraX() {
+        return this.aCameraX;
+    }
+
+    public void setCameraX(int pCameraX) {
+        this.aCameraX = pCameraX;
+    }
+
+    public ArrayList<Wall> getStoredWalls() {
+        return this.aStoredWalls;
     }
 
 

@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 public class Player {
 
-    private final GamePanel panel;
     private int aX; //Player x Coordinate
     private int aY; //Player y Coordinate 
     private final int aWidth;
@@ -75,7 +74,6 @@ public class Player {
      *
      */
     public Player(final int pX, final int pY) {
-
 
         this.aX = pX;
         this.aY = pY;
@@ -287,7 +285,7 @@ public class Player {
 
         //hit box x
         aHitBox.x += aXSpeed;
-        for (Wall wall : panel.getStoredWalls()) {
+        for (Wall wall : aFl.getStoredWalls()) {
             if (aHitBox.intersects(wall.getHitBox())) {
                 aHitBox.x -= aXSpeed;
                 while (!wall.getHitBox().intersects(aHitBox)) {
@@ -301,7 +299,7 @@ public class Player {
 
         //hit box y
         aHitBox.y += aYSpeed;
-        for (Wall wall : panel.getStoredWalls()) {
+        for (Wall wall : aFl.getStoredWalls()) {
             if (aHitBox.intersects(wall.getHitBox())) {
                 aCurrentJumpStatus = aNOT_JUMPING;
                 aHitBox.y -= aYSpeed;
@@ -314,7 +312,7 @@ public class Player {
             }
         }
 
-        panel.setCameraX(panel.getCameraX() + (int) aXSpeed);
+        aFl.setCameraX(aFl.getCameraX() + (int) aXSpeed);
         aY += aYSpeed;
 
         aHitBox.x = aX;
@@ -362,3 +360,4 @@ public class Player {
         }
     }
 }
+

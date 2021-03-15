@@ -36,7 +36,6 @@ public class GamePanel extends javax.swing.JPanel implements KeyListener {
 
     public void init() {
         this.vStateManager = new StateManager();
-        createWall();
         aGameTimer = new Timer();
     }
 
@@ -57,43 +56,10 @@ public class GamePanel extends javax.swing.JPanel implements KeyListener {
     }
 
 
-    public int getCameraX() {
-        return this.aCameraX;
-    }
 
-    public void setCameraX(int pCameraX) {
-        this.aCameraX = pCameraX;
-    }
-
-    public ArrayList<Wall> getStoredWalls() {
-        return this.aStoredWalls;
-    }
-
-    public void createWall() {
-        for (int i = 50; i < 3000; i += 50) {
-            aStoredWalls.add(new Wall(i, 600, 50, 50));
-        }
-        aStoredWalls.add(new Wall(50, 550, 50, 50));
-        aStoredWalls.add(new Wall(250, 500, 50, 50));
-        aStoredWalls.add(new Wall(400, 450, 50, 50));
-        aStoredWalls.add(new Wall(550, 400, 50, 50));
-        aStoredWalls.add(new Wall(600, 450, 50, 50));
-    }
-
-
-
-    public void paint(Graphics g) {
+    public void paint(Graphics2D g) {
         vStateManager.paint(g);
         super.paint(g);
-
-
-        g.drawImage(aBackGround, 0, 0, 900, 900, this);
-
-        for (Wall wall : aStoredWalls) {
-            wall.draw(g);
-        }
-        this.aPlayer.draw(g);
-
     }
 
     @Override
