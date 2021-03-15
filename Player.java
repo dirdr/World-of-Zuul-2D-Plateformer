@@ -72,11 +72,11 @@ public class Player {
      * Player Constructor
      * @param pX x start coordinate
      * @param pY y start coordinate
-     * @param panel
+     *
      */
-    public Player(final int pX, final int pY, final GamePanel panel) {
+    public Player(final int pX, final int pY) {
 
-        this.panel = panel;
+
         this.aX = pX;
         this.aY = pY;
         this.aJumpForce = aJUMP_FORCE; //Original Jump Force (Original Gravity) CONST

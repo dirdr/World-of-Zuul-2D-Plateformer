@@ -22,11 +22,9 @@ import java.awt.event.KeyEvent;
 
 public class GamePanel extends javax.swing.JPanel implements KeyListener {
 
-    private Player aPlayer;
+    //GameTimer
     private Timer aGameTimer;
-    private ArrayList<Wall> aStoredWalls;
-    private int aCameraX;
-    private Image aBackGround;
+    //State Manager
     private StateManager vStateManager;
 
 
@@ -38,17 +36,8 @@ public class GamePanel extends javax.swing.JPanel implements KeyListener {
 
     public void init() {
         this.vStateManager = new StateManager();
-        aPlayer = new Player(400, 300,this);
-        aStoredWalls = new ArrayList<Wall>();
         createWall();
         aGameTimer = new Timer();
-
-        try {
-            aBackGround = ImageIO.read(new File("TileSet/spr_Sky_strip.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
     public void update() {

@@ -1,4 +1,13 @@
+import java.awt.*;
+import java.util.ArrayList;
+
 public class FirstLevel extends State {
+
+    private ArrayList<Wall> aStoredWalls;
+    private int aCameraX;
+    private Player aPlayer;
+    private Image aBackGround;
+
 
 
     /**
@@ -34,7 +43,7 @@ public class FirstLevel extends State {
      */
     @Override
     public void init() {
-
+        aPlayer = new Player(400, 300);
     }
 
 
