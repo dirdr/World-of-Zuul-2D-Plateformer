@@ -17,7 +17,9 @@ public class StateManager {
         aStates = new ArrayList<State>();
         aCurrentState = aMENU_STATE;
         aStates.add(new Menu(this));
+        aStates.add(new FirstLevel(this));
     }
+
 
     public void setState(final int pState) {
         //change the aCurrentState variable

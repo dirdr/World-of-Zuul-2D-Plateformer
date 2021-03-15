@@ -11,14 +11,16 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.security.Key;
 import java.util.*;
 import java.awt.event.KeyEvent;
 
 
-public class GamePanel extends javax.swing.JPanel implements ActionListener {
+public class GamePanel extends javax.swing.JPanel implements KeyListener {
 
     private Player aPlayer;
     private Timer aGameTimer;
@@ -31,6 +33,7 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
 
     public GamePanel() {
         this.init();
+        this.run();
     }
 
     public void init() {
@@ -49,17 +52,17 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
     }
 
     public void update() {
+        KeyHandler.update(); //update the key pressed or released by the user
+        vStateManager.update(); //update the current state
+    }
+
+    public void run() {
         //MAIN GAME LOOP
         aGameTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                vStateManager.update();
-                aPlayer.update();
-                for (Wall wall : aStoredWalls) {
-                    wall.set(aCameraX);
-                }
+                update();
                 repaint();
-
             }
         }, 0, 16);
     }
@@ -105,43 +108,27 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-    }
-
-    void keyPressed(KeyEvent pE) {
-
-        if (pE.getKeyChar() == 'q') {
-            aPlayer.aKeyLeft = true;
-        }
-        if (pE.getKeyChar() == 'd') {
-            aPlayer.aKeyRight = true;
-        }
-        if (pE.getKeyChar() == 's') {
-            aPlayer.aKeyDown = true;
-        }
-        if (pE.getKeyChar() == ' ' || pE.getKeyChar() == 'z') {
-            aPlayer.aKeyUp = true;
-        }
-    }
-
-    void keyReleased(KeyEvent pE) {
-
-        if (pE.getKeyChar() == 'q') {
-            aPlayer.aKeyLeft = false;
-        }
-        if (pE.getKeyChar() == 'd') {
-            aPlayer.aKeyRight = false;
-        }
-        if (pE.getKeyChar() == 's') {
-            aPlayer.aKeyDown = false;
-        }
-        if (pE.getKeyChar() == ' ' || pE.getKeyChar() == 'z') {
-            aPlayer.aKeyUp = false;
-        }
-
-
+    public void keyTyped(KeyEvent e) {
 
     }
 
+    /**
+     * KeyPressed Implemented Method from KeyListener interface
+     * @param pE the keyEvent
+     * this method take the key event pE and use the KeyHandler set method to update the boolean array of KeyPressed
+     */
+    @Override
+    public void keyPressed(final KeyEvent pE) {
+        KeyHandler.set(pE.getKeyCode(), true); //true because the key is pressed
+    }
 
+    /**
+     * KeyReleased implemented method from KeyListener Interface
+     * @param pE the KeyEvent
+     * this method take the key event pE and use the KeyHandler set method to update the boolean array of KeyPressed
+     */
+    @Override
+    public void keyReleased(final KeyEvent pE) {
+        KeyHandler.set(pE.getKeyCode(), false); //false because the key is not pressed
+    }
 }

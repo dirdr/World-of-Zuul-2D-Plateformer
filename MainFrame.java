@@ -21,7 +21,7 @@ public class MainFrame extends javax.swing.JFrame {
         vPanel.setSize(this.getSize());
         vPanel.setVisible(true);
         this.add(vPanel);
-        addKeyListener(new KeyChecker(vPanel));
+
 
     }
 
