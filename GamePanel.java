@@ -20,28 +20,40 @@ import java.awt.event.KeyEvent;
 
 public class GamePanel extends javax.swing.JPanel implements ActionListener {
 
-    private final Player aPlayer;
-    private final Timer aGameTimer;
-    private final ArrayList<Wall> aStoredWalls;
+    private Player aPlayer;
+    private Timer aGameTimer;
+    private ArrayList<Wall> aStoredWalls;
     private int aCameraX;
     private Image aBackGround;
+    private StateManager vStateManager;
 
 
 
     public GamePanel() {
+        this.init();
+    }
+
+    public void init() {
+        this.vStateManager = new StateManager();
         aPlayer = new Player(400, 300,this);
         aStoredWalls = new ArrayList<Wall>();
+        createWall();
+        aGameTimer = new Timer();
+
         try {
             aBackGround = ImageIO.read(new File("TileSet/spr_Sky_strip.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        createWall();
-        aGameTimer = new Timer();
+
+    }
+
+    public void update() {
         //MAIN GAME LOOP
         aGameTimer.schedule(new TimerTask() {
             @Override
             public void run() {
+                vStateManager.update();
                 aPlayer.update();
                 for (Wall wall : aStoredWalls) {
                     wall.set(aCameraX);
@@ -50,8 +62,8 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
 
             }
         }, 0, 16);
-
     }
+
 
     public int getCameraX() {
         return this.aCameraX;
@@ -79,6 +91,7 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
 
 
     public void paint(Graphics g) {
+        vStateManager.paint(g);
         super.paint(g);
 
 
@@ -125,6 +138,8 @@ public class GamePanel extends javax.swing.JPanel implements ActionListener {
         if (pE.getKeyChar() == ' ' || pE.getKeyChar() == 'z') {
             aPlayer.aKeyUp = false;
         }
+
+
 
     }
 

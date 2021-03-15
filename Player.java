@@ -320,7 +320,6 @@ public class Player {
         aHitBox.x = aX;
         aHitBox.y = aY;
 
-        System.out.print(aCurrentStatus);
 
     }
 

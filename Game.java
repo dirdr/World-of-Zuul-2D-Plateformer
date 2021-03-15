@@ -60,6 +60,7 @@ public class Game {
         aFrame.setResizable(false);
         aFrame.setTitle("nom du jeu a definir");
         aFrame.setVisible(true);
+        aFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
 
