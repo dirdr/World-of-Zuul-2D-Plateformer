@@ -48,13 +48,8 @@ public class Game {
 
 
     public void play() {
-        try {
-            aFrame = new MainFrame();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        aFrame = new MainFrame();
         aFrame.setSize(900, 900);
-
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         aFrame.setLocation((int) (screenSize.getWidth() / 2 - aFrame.getSize().getWidth() / 2), (int) (screenSize.getHeight() / 2 - aFrame.getSize().getHeight() / 2));
         aFrame.setResizable(false);

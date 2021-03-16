@@ -5,6 +5,7 @@
  * @version beta1
  */
 
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -255,7 +256,7 @@ public class Player {
         if (aXSpeed < -aMaxSpeed) {
             aXSpeed = -aMaxSpeed;
         }
-        
+
         if (aCurrentJumpStatus == aNOT_JUMPING && aKeyUp) {
             aCurrentJumpStatus = aRISING;
             aYSpeed -= aJumpForce;

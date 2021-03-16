@@ -1,29 +1,27 @@
 /**
- * Décrivez votre classe MainFrame ici.
- *
+ * The Main Frame Class is used to create the Main Frame
  * @author Adrien PELFRESNE
- * @version beta1
+ * @version inter1
  */
 
-
-import java.io.IOException;
 
 public class MainFrame extends javax.swing.JFrame {
 
 
-
-
-    public MainFrame() throws IOException {
-
+    /**
+     * Create the JFrame on which the game is running
+     */
+    public MainFrame() {
+        //create the gamePanel
         GamePanel vPanel = new GamePanel();
+        //set the game Panel location
         vPanel.setLocation(0, 0);
+        //set the panel size by calling the MainFrame (JFrame) getSize() method
         vPanel.setSize(this.getSize());
+        //set the panel to be visible
         vPanel.setVisible(true);
+        //add the Panel to the Frame (JFrame)
         this.add(vPanel);
-
-
     }
-
-
 
 }

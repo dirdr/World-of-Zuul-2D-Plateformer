@@ -1,13 +1,12 @@
-import javax.imageio.IIOException;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.security.Key;
 
 public class Menu extends State {
 
+
     BufferedImage aBackGround;
-    private String[] aChoices;
+    private final String[] aChoices;
     private int aCurrentChoice;
     private Color aTitleColor;
     private Font aTitleFont;
@@ -21,32 +20,53 @@ public class Menu extends State {
         this.aCurrentChoice = 0;
     }
 
-
+    /**
+     * Overridden method from the abstract class State
+     * paint all the Menu's components
+     * @param pG Graphics2D
+     */
     @Override
     public void paint(Graphics2D pG) {
+        //Draw the background
         pG.drawImage(aBackGround, 0, 0, 900, 900, null);
+        //set the Graphics2D color (Title)
         pG.setColor(aTitleColor);
+        //set the Graphics 2d Font (Title)
         pG.setFont(aTitleFont);
-        pG.drawString("Jump Castle", 300, 100);
+        //draw The title
+        pG.drawString("Jump Castle", 280, 100);
+        //set the Graphics2D Color (body)
         pG.setColor(aBodyColor);
+        //set the graphics2D Font (Body)
         pG.setFont(aBodyFont);
+        //if the current choice is equal to i draw the string in white
+        //create an "highlight" effect
         for (int i = 0; i < aChoices.length; i++) {
-            if (aChoices[i].equals(aCurrentChoice)) {
+            if (i == aCurrentChoice) {
+                //white
                 pG.setColor(aBodyColorModified);
-
             } else {
+                //grey
                 pG.setColor(aBodyColor);
             }
+            //Draw the string in the Choices String array
             pG.drawString(this.aChoices[i], 400, 400 + i * 100);
         }
     }
 
-
+    /**
+     * Overridden method from the abstract class "State"
+     * Update the Menu
+     */
     @Override
     public void update() {
-
+        input();
     }
 
+    /**
+     * Overridden method from the abstract class State
+     * Initialize all the elements in the menu, including the background, Font, Color
+     */
     @Override
     public void init() {
 
@@ -64,6 +84,9 @@ public class Menu extends State {
 
     }
 
+    /**
+     * check the CurrentChoice and do stuff depending of its value
+     */
     public void selectionHandler() {
         if (this.aCurrentChoice == 0) {
             //start textual mode
@@ -79,16 +102,29 @@ public class Menu extends State {
         }
     }
 
+    /**
+     * Overridden method from the abstract class "State"
+     * Handle the input in the menu
+     */
     @Override
     public void input() {
+        //if the User press Enter invoke the selectionHandler method
         if (KeyHandler.isPressed(KeyHandler.aENTER)) {
             this.selectionHandler();
         }
         if (KeyHandler.isPressed(KeyHandler.aUP)) {
             this.aCurrentChoice--;
+            if (this.aCurrentChoice < 0) {
+                this.aCurrentChoice = 3;
+            }
         }
         if (KeyHandler.isPressed(KeyHandler.aDOWN)) {
             this.aCurrentChoice++;
+            if (this.aCurrentChoice > 3) {
+                this.aCurrentChoice = 0;
+            }
+
         }
+
     }
 }
