@@ -16,7 +16,6 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() throws IOException {
 
         GamePanel vPanel = new GamePanel();
-
         vPanel.setLocation(0, 0);
         vPanel.setSize(this.getSize());
         vPanel.setVisible(true);

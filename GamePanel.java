@@ -26,6 +26,8 @@ public class GamePanel extends javax.swing.JPanel implements KeyListener {
     private Timer aGameTimer;
     //State Manager
     private StateManager vStateManager;
+    private Graphics2D aG;
+    private BufferedImage aImage;
 
 
 
@@ -35,6 +37,8 @@ public class GamePanel extends javax.swing.JPanel implements KeyListener {
     }
 
     public void init() {
+        aImage = new BufferedImage(900, 900, BufferedImage.TYPE_INT_RGB);
+        aG = (Graphics2D) aImage.getGraphics();
         this.vStateManager = new StateManager();
         aGameTimer = new Timer();
     }
@@ -50,16 +54,22 @@ public class GamePanel extends javax.swing.JPanel implements KeyListener {
             @Override
             public void run() {
                 update();
-                repaint();
+                paint();
+                paintToScreen();
             }
         }, 0, 16);
     }
 
 
+    public void paint() {
+        vStateManager.paint(aG);
+    }
 
-    public void paint(Graphics2D g) {
-        vStateManager.paint(g);
-        super.paint(g);
+    public void paintToScreen() {
+        Graphics g2 = getGraphics();
+        g2.drawImage(aImage, 0, 0, 900, 900, null);
+        g2.dispose();
+
     }
 
     @Override

@@ -14,11 +14,15 @@ public class StateManager {
 
     public StateManager() {
         //initialize the field (ArrayList of state)
-        aStates = new ArrayList<State>();
-        aCurrentState = aMENU_STATE;
-        aStates.add(new Menu(this));
-        aStates.add(new FirstLevel(this));
+        this.aStates = new ArrayList<State>();
+        this.aCurrentState = aMENU_STATE;
+        this.aStates.add(new Menu(this));
+        this.aStates.add(new FirstLevel(this));
+        this.setState(aMENU_STATE);
+
     }
+
+
 
 
     public void setState(final int pState) {

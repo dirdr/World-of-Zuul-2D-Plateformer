@@ -27,7 +27,7 @@ public class Menu extends State {
         pG.drawImage(aBackGround, 0, 0, 900, 900, null);
         pG.setColor(aTitleColor);
         pG.setFont(aTitleFont);
-        pG.drawString("Jump Castle", 100, 100);
+        pG.drawString("Jump Castle", 300, 100);
         pG.setColor(aBodyColor);
         pG.setFont(aBodyFont);
         for (int i = 0; i < aChoices.length; i++) {
@@ -37,7 +37,7 @@ public class Menu extends State {
             } else {
                 pG.setColor(aBodyColor);
             }
-            pG.drawString(this.aChoices[i], 200, 200 + i * 30);
+            pG.drawString(this.aChoices[i], 400, 400 + i * 100);
         }
     }
 
@@ -57,9 +57,9 @@ public class Menu extends State {
             e.printStackTrace();
         }
         aTitleColor = new Color(0, 0, 0);
-        aTitleFont = new Font("Century Gothic", Font.PLAIN, 20);
+        aTitleFont = new Font("Century Gothic", Font.PLAIN, 55);
         aBodyColor = new Color(89, 89, 89);
-        aBodyFont = new Font("Courrier New", Font.PLAIN, 15);
+        aBodyFont = new Font("Courrier New", Font.PLAIN, 40);
         aBodyColorModified = new Color(255, 255, 255);
 
     }

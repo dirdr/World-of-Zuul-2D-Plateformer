@@ -30,11 +30,11 @@ public class Player {
 
 
 
-    private final double aJumpForce;
+    private final double aJumpForce; //player's jump Force
     private float aJumpTimeCounter;
     private final float aJumpTime;
     private final double aJumpForceModified;
-    private int aDirection;
+    private int aDirection; //player direction, left: -1, right: 1
 
 
 
@@ -44,7 +44,7 @@ public class Player {
     private AnimationManager aCharacterFalling;
 
 
-    private final int aMaxSpeed;
+    private final int aMaxSpeed; //Player's max speed can't overcome this value
 
     private static final int aJUMP_FORCE = 7;
     private static final int aJUMP_TIME = 2;
@@ -87,12 +87,12 @@ public class Player {
         this.aHitBox = new Rectangle(pX, pY, aWidth, aHeight);
         this.aMaxSpeed = aMAX_SPEED;
 
-        this.aCurrentStatus = aIDLE;
-        this.aCurrentJumpStatus = aNOT_JUMPING;
-        this.aDirection = 1;
+        this.aCurrentStatus = aIDLE; //when a player is created is default status is Idle
+        this.aCurrentJumpStatus = aNOT_JUMPING; //when a player is created is default jump status is not jumping
+        this.aDirection = 1; //when a player is created, is default direction is right
 
-        this.init();
-        aCharacterIDLE.start();
+        this.init();  //initialize the Player sprites
+        aCharacterIDLE.start(); //start the Idle animation
 
     }
 
@@ -216,6 +216,7 @@ public class Player {
 
     /**
      * update function
+     * handle direction, status change, jump, hitBox Collisions
      */
     public void update() {
 
@@ -254,8 +255,7 @@ public class Player {
         if (aXSpeed < -aMaxSpeed) {
             aXSpeed = -aMaxSpeed;
         }
-
-
+        
         if (aCurrentJumpStatus == aNOT_JUMPING && aKeyUp) {
             aCurrentJumpStatus = aRISING;
             aYSpeed -= aJumpForce;
@@ -272,52 +272,10 @@ public class Player {
         if (!aKeyUp) {
             aCurrentJumpStatus = aFALLING;
         }
-
-
         //Gravity effect on the player
         aYSpeed += 0.5;
-
-
-
-
-
-
-
-        //hit box x
-        aHitBox.x += aXSpeed;
-        for (Wall wall : aFl.getStoredWalls()) {
-            if (aHitBox.intersects(wall.getHitBox())) {
-                aHitBox.x -= aXSpeed;
-                while (!wall.getHitBox().intersects(aHitBox)) {
-                    aHitBox.x += Math.signum(aXSpeed);
-                }
-                aHitBox.x -= Math.signum(aXSpeed);
-                aXSpeed = 0;
-                aX = aHitBox.x;
-            }
-        }
-
-        //hit box y
-        aHitBox.y += aYSpeed;
-        for (Wall wall : aFl.getStoredWalls()) {
-            if (aHitBox.intersects(wall.getHitBox())) {
-                aCurrentJumpStatus = aNOT_JUMPING;
-                aHitBox.y -= aYSpeed;
-                while (!wall.getHitBox().intersects(aHitBox)) {
-                    aHitBox.y += Math.signum(aYSpeed);
-                }
-                aHitBox.y -= Math.signum(aYSpeed);
-                aYSpeed = 0;
-                aY = aHitBox.y;
-            }
-        }
-
-        aFl.setCameraX(aFl.getCameraX() + (int) aXSpeed);
-        aY += aYSpeed;
-
         aHitBox.x = aX;
         aHitBox.y = aY;
-
 
     }
 
@@ -351,6 +309,12 @@ public class Player {
     }
 
 
+    /**
+     * Draw function for the player
+     * draw the Buffered Image comming from the animationChooser method
+     * if aDirection = -1 draw the sprite to the left else draw the sprite to the right
+     * @param g  the graphics
+     */
     public void draw(Graphics g) {
         BufferedImage vImage = this.animationChooser();
         if (aDirection == -1) {
