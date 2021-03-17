@@ -2,8 +2,8 @@ import java.awt.event.KeyEvent;
 
 public class KeyHandler {
 
-    public static boolean[] prevKeyState = new boolean[8];
-    public static boolean[] keyState= new boolean[8];
+    public static boolean[] aPrevKeyState = new boolean[8];
+    public static boolean[] aKeyState= new boolean[8];
 
     public static final int aENTER = 0;
     public static final int aECHAP = 1;
@@ -16,13 +16,13 @@ public class KeyHandler {
 
     public static void set(int pI, boolean pBool) {
 
-        if(pI == KeyEvent.VK_ENTER) keyState[aENTER] = pBool;
-        else if(pI == KeyEvent.VK_ESCAPE) keyState[aECHAP] = pBool;
-        else if(pI == KeyEvent.VK_Z) keyState[aUP] = pBool;
-        else if(pI == KeyEvent.VK_S) keyState[aDOWN] = pBool;
-        else if(pI == KeyEvent.VK_Q) keyState[aLEFT] = pBool;
-        else if(pI == KeyEvent.VK_D) keyState[aRIGHT] = pBool;
-        else if(pI == KeyEvent.VK_F) keyState[aATTACK] = pBool;
+        if(pI == KeyEvent.VK_ENTER) aKeyState[aENTER] = pBool;
+        else if(pI == KeyEvent.VK_ESCAPE) aKeyState[aECHAP] = pBool;
+        else if(pI == KeyEvent.VK_Z) aKeyState[aUP] = pBool;
+        else if(pI == KeyEvent.VK_S) aKeyState[aDOWN] = pBool;
+        else if(pI == KeyEvent.VK_Q) aKeyState[aLEFT] = pBool;
+        else if(pI == KeyEvent.VK_D) aKeyState[aRIGHT] = pBool;
+        else if(pI == KeyEvent.VK_F) aKeyState[aATTACK] = pBool;
     }
 
 
@@ -30,18 +30,16 @@ public class KeyHandler {
      * update the input (the keyPressed become a previous key pressed)
      */
     public static void update() {
-        for(int i = 0; i < 8; i++) {
-            prevKeyState[i] = keyState[i];
-        }
+        System.arraycopy(aKeyState, 0, aPrevKeyState, 0, 8);
     }
 
     /**
      *
      * @param key key
-     * @return a boolean value depending if the key specified with the key  is pressed or not
+     * @return a boolean value depending if the key specified with the int value passed as a parameter is pressed or not
      */
         public static boolean isPressed(int key) {
-            return keyState[key] && !prevKeyState[key];
+            return aKeyState[key] && !aPrevKeyState[key];
         }
 
 

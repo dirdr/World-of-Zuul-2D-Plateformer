@@ -41,15 +41,18 @@ public class Game {
 
     public Game() {
         this.createRooms();
-        this.play();
+    }
 
+    public static void main(String[] args) {
+        Game game = new Game();
+        game.play();
     }
 
 
 
     public void play() {
         aFrame = new MainFrame();
-        aFrame.setSize(900, 900);
+        aFrame.setSize(GamePanel.aWIDTH, GamePanel.aHEIGHT);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         aFrame.setLocation((int) (screenSize.getWidth() / 2 - aFrame.getSize().getWidth() / 2), (int) (screenSize.getHeight() / 2 - aFrame.getSize().getHeight() / 2));
         aFrame.setResizable(false);

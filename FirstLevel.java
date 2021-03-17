@@ -49,7 +49,6 @@ public class FirstLevel extends State {
     @Override
     public void init() {
         aPlayer = new Player(400, 300);
-
     }
 
 

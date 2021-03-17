@@ -12,8 +12,8 @@ public class StateManager {
 
     //states
 
-    private static final int aMENU_STATE = 0;
-    private static final int aFIRST_LEVEL = 1;
+    public static final int aMENU_STATE = 0;
+    public static final int aFIRST_LEVEL = 1;
 
 
 

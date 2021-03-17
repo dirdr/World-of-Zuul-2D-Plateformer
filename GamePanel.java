@@ -29,8 +29,10 @@ public class GamePanel extends javax.swing.JPanel implements KeyListener, Runnab
     private StateManager vStateManager;
     private Graphics2D aG;
     private BufferedImage aImage;
-    private Thread thread;
-    private boolean running;
+    private Thread aThread;
+    private boolean aRunning;
+    public static final int aWIDTH = 700;
+    public static final int aHEIGHT = 700;
 
 
     public GamePanel() {
@@ -47,10 +49,10 @@ public class GamePanel extends javax.swing.JPanel implements KeyListener, Runnab
      */
     public void addNotify() {
         super.addNotify();
-        if(thread == null) {
-            thread = new Thread(this);
+        if(aThread == null) {
+            aThread = new Thread(this);
             addKeyListener(this);
-            thread.start();
+            aThread.start();
         }
     }
 
@@ -59,10 +61,10 @@ public class GamePanel extends javax.swing.JPanel implements KeyListener, Runnab
      * Initialize the GamePanel
      */
     public void init() {
-        aImage = new BufferedImage(900, 900, BufferedImage.TYPE_INT_RGB);
+        aImage = new BufferedImage(aWIDTH, aHEIGHT, BufferedImage.TYPE_INT_RGB);
         aG = (Graphics2D) aImage.getGraphics();
         this.vStateManager = new StateManager();
-        this.running = true;
+        this.aRunning = true;
     }
 
 
@@ -81,7 +83,7 @@ public class GamePanel extends javax.swing.JPanel implements KeyListener, Runnab
         long vWait;
 
         // game loop
-        while(running) {
+        while(aRunning) {
 
             //initialize the vStart var
             vStart = System.nanoTime();
@@ -127,7 +129,7 @@ public class GamePanel extends javax.swing.JPanel implements KeyListener, Runnab
      */
     public void paintToScreen() {
         Graphics g2 = getGraphics();
-        g2.drawImage(aImage, 0, 0, 900, 900, null);
+        g2.drawImage(aImage, 0, 0, aWIDTH, aHEIGHT, null);
         g2.dispose();
     }
 
@@ -155,6 +157,5 @@ public class GamePanel extends javax.swing.JPanel implements KeyListener, Runnab
     public void keyReleased(final KeyEvent pE) {
         KeyHandler.set(pE.getKeyCode(), false); //false because the key is not pressed
     }
-
 
 }
