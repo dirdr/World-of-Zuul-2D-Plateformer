@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class FirstLevel extends State {
@@ -12,6 +13,9 @@ public class FirstLevel extends State {
 
     @Override
     public void input() {
+        this.aPlayer.aKeyLeft = KeyHandler.isPressed(KeyHandler.aLEFT);
+        this.aPlayer.aKeyRight = KeyHandler.isPressed(KeyHandler.aRIGHT);
+        this.aPlayer.aKeyUp = KeyHandler.isPressed(KeyHandler.aUP);
 
     }
 
@@ -30,7 +34,8 @@ public class FirstLevel extends State {
      */
     @Override
     public void paint(Graphics2D pG) {
-
+        pG.drawImage(this.aBackGround, 0, 0, GamePanel.aWIDTH, GamePanel.aHEIGHT, null);
+        this.aPlayer.draw(pG);
     }
 
     /**
@@ -39,7 +44,8 @@ public class FirstLevel extends State {
      */
     @Override
     public void update() {
-
+        input();
+        this.aPlayer.update();
     }
 
     /**
@@ -48,6 +54,12 @@ public class FirstLevel extends State {
      */
     @Override
     public void init() {
+        BufferedImageManager vLoader = new BufferedImageManager();
+        try {
+            this.aBackGround = vLoader.load("TileSet/spr_Sky_strip.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         aPlayer = new Player(400, 300);
     }
 
@@ -63,6 +75,8 @@ public class FirstLevel extends State {
     public ArrayList<Wall> getStoredWalls() {
         return this.aStoredWalls;
     }
+
+
 
 
 }

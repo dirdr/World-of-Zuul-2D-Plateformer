@@ -35,7 +35,7 @@ public class Menu extends State {
         //set the Graphics 2d Font (Title)
         pG.setFont(aTitleFont);
         //draw The title
-        pG.drawString("C A S T L E", GamePanel.aWIDTH/2, 100);
+        pG.drawString("J U M P  C A S T L E", GamePanel.aWIDTH/2-280, 100);
         //set the Graphics2D Color (body)
         pG.setColor(aBodyColor);
         //set the graphics2D Font (Body)
@@ -52,7 +52,7 @@ public class Menu extends State {
                 pG.setColor(aBodyColor);
             }
             //Draw the string in the Choices String array
-            pG.drawString(this.aChoices[i], GamePanel.aWIDTH/2-50, 400 + i * 100);
+            pG.drawString(this.aChoices[i], GamePanel.aWIDTH/2-60, 300 + i * 100);
         }
     }
 
@@ -74,12 +74,12 @@ public class Menu extends State {
 
         BufferedImageManager vLoader = new BufferedImageManager();
         try {
-            this.aBackGround = vLoader.load("TileSet/spr_Sky_strip.png");
+            this.aBackGround = vLoader.load("TileSet/Menu-BackGround.jpg");
         } catch (IOException e) {
             e.printStackTrace();
         }
         aTitleColor = new Color(0, 0, 0);
-        aTitleFont = new Font("Century Gothic", Font.PLAIN, 55);
+        aTitleFont = new Font("Century Gothic", Font.PLAIN, 60);
         aBodyColor = new Color(89, 89, 89);
         aBodyFont = new Font("Courrier New", Font.PLAIN, 40);
         aBodyColorModified = new Color(255, 255, 255);

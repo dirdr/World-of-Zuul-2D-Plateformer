@@ -17,17 +17,16 @@ import java.util.ArrayList;
 public class Player {
 
     private int aX; //Player x Coordinate
-    private int aY; //Player y Coordinate 
+    private int aY; //Player y Coordinate
     private final int aWidth;
     private final int aHeight;
     private double aXSpeed;
     private double aYSpeed;
-    private final Rectangle aHitBox; //utilisation pour gerer les colisions
+    private final Rectangle aHitBox; //utilisation pour gérer les colisions
 
     boolean aKeyLeft; //press the left key or not 
     boolean aKeyRight; //press the right key or not
-    boolean aKeyUp; //press the up key or not 
-    boolean aKeyDown; //press the down key or not 
+    boolean aKeyUp; //press the up key or not
 
 
 
@@ -262,6 +261,7 @@ public class Player {
             aYSpeed -= aJumpForce;
             aJumpTimeCounter = aJumpTime;
         }
+
         if (aKeyUp && aCurrentJumpStatus == aRISING) {
             if (aJumpTimeCounter > 0) {
                 aYSpeed -= aJumpForceModified;
@@ -324,5 +324,8 @@ public class Player {
             g.drawImage(vImage, aX, aY, aWidth, aHeight, null);
         }
     }
+
+
+
 }
 

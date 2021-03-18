@@ -65,6 +65,7 @@ public class GamePanel extends javax.swing.JPanel implements KeyListener, Runnab
         aG = (Graphics2D) aImage.getGraphics();
         this.vStateManager = new StateManager();
         this.aRunning = true;
+
     }
 
 
@@ -108,6 +109,7 @@ public class GamePanel extends javax.swing.JPanel implements KeyListener, Runnab
                 e.printStackTrace();
             }
 
+
         }
 
     }
@@ -132,6 +134,7 @@ public class GamePanel extends javax.swing.JPanel implements KeyListener, Runnab
         g2.drawImage(aImage, 0, 0, aWIDTH, aHEIGHT, null);
         g2.dispose();
     }
+
 
     @Override
     public void keyTyped(KeyEvent e) {
