@@ -45,13 +45,19 @@ public class Map {
     public void load() {
         BufferedImageManager vLoader = new BufferedImageManager();
         try {
-            this.aTileSpriteSheet = new SpriteSheet(vLoader.load("TileSet/spr_VillageTileSetNoBkg_strip.png");
+            this.aTileSpriteSheet = new SpriteSheet(vLoader.load("TileSet/spr_VillageTileSetNoBkg_strip.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         this.aNumberOfTilesInTheTileSet = 48;
+        int vTemp = 0;
+        //we go through all the tile's sprite and load them into the BufferedImage ArrayList
         for (int i = 0; i < this.aNumberOfTilesInTheTileSet; i++) {
-            //load all the sprite in the tile set ArrayList
+            aTiles.add(aTileSpriteSheet.spritePicker(16 + vTemp, 16, 32, 32));
+            vTemp += 64;
         }
+
     }
+
+
 }
