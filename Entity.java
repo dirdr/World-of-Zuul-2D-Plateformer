@@ -23,12 +23,10 @@ public class Entity {
 
 
     public boolean isIntersected(Entity pSecondEntity) {
-
+           return true;
     }
 
-    public Rectangle getHitBox() {
-        return new Rectangle(x - )
-    }
+   
 
 
 
