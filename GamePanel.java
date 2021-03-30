@@ -9,6 +9,7 @@
 
 import javax.imageio.ImageIO;
 import javax.management.remote.SubjectDelegationPermission;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.security.Key;
 import java.util.*;
 import java.awt.event.KeyEvent;
+import java.util.Timer;
 
 
 public class GamePanel extends javax.swing.JPanel implements KeyListener, Runnable {
@@ -33,6 +35,7 @@ public class GamePanel extends javax.swing.JPanel implements KeyListener, Runnab
     private boolean aRunning;
     public static final int aWIDTH = 700;
     public static final int aHEIGHT = 700;
+    public JTextField aEntryField = new JTextField();
 
 
     public GamePanel() {
@@ -65,6 +68,7 @@ public class GamePanel extends javax.swing.JPanel implements KeyListener, Runnab
         aG = (Graphics2D) aImage.getGraphics();
         this.vStateManager = new StateManager();
         this.aRunning = true;
+
 
     }
 
@@ -160,5 +164,6 @@ public class GamePanel extends javax.swing.JPanel implements KeyListener, Runnab
     public void keyReleased(final KeyEvent pE) {
         KeyHandler.set(pE.getKeyCode(), false); //false because the key is not pressed
     }
+
 
 }

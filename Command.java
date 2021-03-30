@@ -2,8 +2,10 @@
 
 public class Command
 {
-    private String aCommandWord;
-    private String aSecondWord;
+    // the first command
+    private final String aCommandWord;
+    // the complementary command to the first command
+    private final String aSecondWord;
     
     /**
      * Command's class Constructor 
@@ -43,7 +45,7 @@ public class Command
     public boolean isUnknown()
     {
         return this.aCommandWord == null;
-    } //isUknown()
+    }
     
     
 } // Command

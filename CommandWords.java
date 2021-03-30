@@ -1,0 +1,52 @@
+/*
+ * This class is the main class of the "World of Zuul" application.
+ * "World of Zuul" is a very simple, text based adventure game.
+ *
+ * This class holds an enumeration of all command words known to the game.
+ * It is used to recognise commands as they are typed in.
+ *
+ * @author  Michael Kolling and David J. Barnes
+ * @version 1.0 (February 2002) DBMOD: 04/04/2008
+ */
+
+public class CommandWords
+{
+    // a constant array that holds all valid command words
+    private static final String validCommands[] = {
+            "go", "quit", "help",
+    };
+
+    /**
+     * Constructor - initialise the command words.
+     */
+    public CommandWords()
+    {
+        // nothing to do at the moment...
+    }
+
+    /**
+     * Check whether a given String is a valid command word.
+     * Return true if it is, false if it isn't.
+     **/
+    public boolean isCommand(String aString)
+    {
+        for (String validCommand : validCommands) {
+            if (validCommand.equals(aString))
+                return true;
+        }
+        // if we get here, the string was not found in the commands
+        return false;
+    }
+
+    /*
+     * returns a String of all valid commands.
+     */
+    public String getCommandList()
+    {
+        StringBuilder vCommands = new StringBuilder();
+        for (String validCommand : validCommands) {
+            vCommands.append(validCommand).append("  ");
+        }
+        return vCommands.toString();
+    }
+}
